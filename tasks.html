@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض المهام</title>
+  <style>
+    body {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      background-color: #e0f7fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 500px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #00796b;
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      color: #004d40;
+    }
+
+    .habit-list {
+      margin-top: 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f0f4c3;
+      border: 1px solid #c5e1a5;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    li:hover {
+      transform: scale(1.02);
+    }
+
+    li.completed {
+      background-color: #a5d6a7;
+      text-decoration: line-through;
+      color: #004d40;
+    }
+
+    li.incomplete {
+      background-color: #ffcdd2;
+      color: #c62828;
+    }
+
+    button {
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #004d40;
+    }
+
+    .delete {
+      background-color: #d32f2f;
+    }
+
+    .delete:hover {
+      background-color: #b71c1c;
+    }
+
+    .back-button {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      padding: 12px;
+      background-color: #26a69a;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .back-button:hover {
+      background-color: #00796b;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>عاداتك اليومية</h1>
+  </header>
+
+  <div class="habit-list">
+    <ul id="habitList"></ul>
+  </div>
+
+  <!-- زر الرجوع إلى الصفحة الرئيسية تحت قائمة المهام -->
+  <a href="INDEX.HTM" class="back-button">الرجوع إلى الصفحة الرئيسية</a>
+</div>
+
+<script>
+  // تحميل العادات وعرضها
+  const habitList = document.getElementById('habitList');
+  // تحميل العادات من localStorage لهذا الجهاز
+  const habits = JSON.parse(localStorage.getItem('deviceSpecificHabits')) || [];
+
+  function renderHabits() {
+    habitList.innerHTML = '';
+    habits.forEach((habit, index) => {
+      const li = document.createElement('li');
+      li.classList.add(habit.completed ? 'completed' : 'incomplete');
+      li.innerHTML = `
+        <span>${habit.name} - ${habit.frequency}</span>
+        <div>
+          <button onclick="toggleHabit(${index})">${habit.completed ? 'مكتملة' : 'غير مكتملة'}</button>
+          <button class="delete" onclick="deleteHabit(${index})">حذف</button>
+        </div>
+      `;
+      habitList.appendChild(li);
+    });
+  }
+
+  // تغيير حالة العادة بين "مكتملة" و "غير مكتملة"
+  function toggleHabit(index) {
+    habits[index].completed = !habits[index].completed;
+    localStorage.setItem('deviceSpecificHabits', JSON.stringify(habits));
+    renderHabits();
+  }
+
+  // حذف العادة
+  function deleteHabit(index) {
+    habits.splice(index, 1);
+    localStorage.setItem('deviceSpecificHabits', JSON.stringify(habits));
+    renderHabits();
+  }
+
+  // عرض العادات عند تحميل الصفحة
+  renderHabits();
+</script>
+
+</body>
+</html>

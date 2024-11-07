@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>سبحة إلكترونية</title>
+  <style>
+    /* إعدادات عامة للصفحة */
+    body {
+      font-family: 'Cairo', sans-serif;
+      direction: rtl;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #4CAF50, #66BB6A);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      text-align: center;
+      background-color: #fff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 320px;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #4CAF50;
+      margin-bottom: 20px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .count {
+      font-size: 3em;
+      color: #333;
+      margin-bottom: 30px;
+      font-weight: bold;
+      padding: 10px;
+      background-color: #e8f5e9;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn, .reset-btn, .home-btn {
+      padding: 15px 25px;
+      font-size: 1.2em;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+      transition: 0.3s ease;
+    }
+
+    .btn {
+      background-color: #66BB6A;
+      color: white;
+      border: none;
+    }
+
+    .btn:hover {
+      background-color: #388e3c;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .reset-btn {
+      background-color: #f44336;
+      color: white;
+      border: none;
+      margin-top: 20px;
+    }
+
+    .reset-btn:hover {
+      background-color: #d32f2f;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* زر العودة للصفحة الرئيسية */
+    .home-btn {
+      background-color: #2196F3;
+      color: white;
+      border: none;
+      margin-top: 20px;
+    }
+
+    .home-btn:hover {
+      background-color: #1976D2;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* تأثيرات عند الضغط على الأزرار */
+    .btn:active, .reset-btn:active, .home-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* تأثيرات على الصفحة */
+    .container {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    /* تأثير Fade In */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>سبحة إلكترونية</h1>
+    <div class="count" id="count">0</div>
+    <button class="btn" onclick="incrementCounter()">اضغط للعد</button>
+    <button class="reset-btn" onclick="resetCounter()">إعادة العد</button>
+    
+    <!-- زر العودة إلى الصفحة الرئيسية -->
+    <button class="home-btn" onclick="window.location.href='INDEX.HTM'">الرجوع إلى الصفحة الرئيسية</button>
+  </div>
+
+  <script>
+    let count = 0;
+
+    // دالة لزيادة العد
+    function incrementCounter() {
+      count++;
+      document.getElementById('count').innerText = count;
+    }
+
+    // دالة لإعادة العد
+    function resetCounter() {
+      count = 0;
+      document.getElementById('count').innerText = count;
+    }
+  </script>
+
+</body>
+</html>
